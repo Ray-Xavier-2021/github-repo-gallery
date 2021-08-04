@@ -1,15 +1,19 @@
 //FETCH USER DATA
 
 // 1. Create Global Variables
-//Displays profile information
+// 1a. Displays profile information
 const profileInfoOverview = document.querySelector('.overview');
-//Username
+// 1b. Username
 const username = 'Ray-Xavier-2021';
-// 1. Select the Repos List
+// 8a. Select the Repos List
 const repoList = document.querySelector('.repo-list');
 // 7a. Create two global variables for displaying repo info
 const reposArea = document.querySelector('.repos');
 const reposDataArea = document.querySelector('.repo-data');
+// 12a-1. Selects the back to repo button
+const repoBtn = document.querySelector('.view-repos');
+// 12a-2. Search bar filter input 
+const filterInput = document.querySelector('.filter-repos');
 
 // 2. Fetch API JSON Data
 // 2a. Create async function to fetch info from GitHub profile
@@ -84,13 +88,12 @@ const displayRepos = function (repos) {
 // DISPLAY REPO INFO
 
 // 7. Declare Two New Global Variables
-    //At the top of code
-
-    
+//At the top of code
+  
 // 8. Add a Click Event
-// 8a. Event listener for repoList
+// 8b. Event listener for repoList
 repoList.addEventListener('click', function (e) {
-// 8b. Check 'if' event target that was clicked matches the <h3> element
+// 8c. Check 'if' event target that was clicked matches the <h3> element
     if (e.target.matches('h3')) {
         const repoName = e.target.innerText;
         //console.log(repoName);
@@ -123,8 +126,6 @@ const getRepoInfo = async function (repoName) {
     displayRepoInfo(repoInfo, languages);
 };
 
-
-
 // 11. Create a Function to Display Specific Repo Info
 const displayRepoInfo = function (repoInfo, languages) {
 // 11a. Empty repo-data innerHTML    
@@ -143,4 +144,20 @@ const displayRepoInfo = function (repoInfo, languages) {
     reposDataArea.classList.remove('hide');
 // 11e. Hide element with class of 'repos'    
     reposArea.classList.add('hide');
+// 13d. Remove 'hide' class from repo back button
+    repoBtn.classList.remove('hide');      
 };
+
+// 12. CREATE A DYNAMIC SEARCH
+// 12a. Create Global Variables to Select a Button and Input
+//At the top of code
+
+// 13. Add a Click 'input' Event to the Back Button
+repoBtn.addEventListener('click', function () {
+// 13a. Unhide class of 'repos' to show where all info is displayed    
+    reposArea.classList.remove('hide');
+// 13b. Add hide class to 'repo-data' section
+    reposDataArea.classList.add('hide');
+// 13c. Add class of 'hide' to repo button
+    repoBtn.classList.add('hide');
+});
