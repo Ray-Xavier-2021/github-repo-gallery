@@ -69,10 +69,12 @@ const getUserRepos = async function () {
     displayRepos(repoData);
 };
 
-// 5. Display Info About Your Repos
+// 5. Displays Your Repos
 // 5a. Create function that displays each repos info
 const displayRepos = function (repos) {
-//Create a loop for each repo in the repository
+// 14a. Display filter input element
+    filterInput.classList.remove('hide');
+// 5a. Create a loop for each repo in the repository
     for (const repo of repos) {
 // 5b. Create a list item for each repo        
         const repoItem = document.createElement('li');
@@ -161,3 +163,25 @@ repoBtn.addEventListener('click', function () {
 // 13c. Add class of 'hide' to repo button
     repoBtn.classList.add('hide');
 });
+
+// 14. Display the Input Element
+
+// 14b. Add an Input Event to the Search Box
+filterInput.addEventListener('input', function (e) {
+// 14c. Capture value of search text
+    const textSearch = e.target.value;
+// 14d. Create variable that selects all elements with class of 'repo'    
+    const repos = document.querySelectorAll('.repo');
+// 14e. Create variable to assign lowercase value of search text;        
+    const repoSearchLowerText = textSearch.toLowerCase();
+// 14f. Loop through each repo 'for' repos and assign a variable the value innText of each repo
+    for (const repo of repos) {
+       const repoLowerText = repo.innerText.toLowerCase();
+// 14g. Check 'if' lowercase repo 'includes' lowercase repo search text 'if' yes hide, else show        
+        if (repoLowerText.includes(repoSearchLowerText)) {
+            repo.classList.remove('hide');
+        }   else {
+            repo.classList.add('hide');
+        }
+    }
+}); 
