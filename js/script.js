@@ -44,6 +44,8 @@ div.innerHTML =
 <p><strong>Number of public repos:</strong> ${data.public_repos}</p>
 </div>`;    
 profileInfo.append(div);
+//Displays repos
+getUserRepo();
 };
 
 //FETCH REPO DATA
@@ -52,7 +54,7 @@ profileInfo.append(div);
 // 2a. Create async function that fetches repos
 const getUserRepo = async function () {
 // 2b. Fetch Repo using API and paramters: sort by updated, show 100 repos per page
-    const fetchRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated?per_page=100`);
+    const fetchRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
     const repoData = await fetchRepos.json();
 // 6. Save and View Your Page
     displayRepos(repoData);
@@ -63,13 +65,13 @@ const getUserRepo = async function () {
 // 5a. Create function that displays each repos info
 const displayRepos = function (repos) {
 //Create a loop for each repo in the repository
-    for ( const repo of repos) {
+    for (const repo of repos) {
 // 5b. Create a list item for each repo        
-        const repoItem = document.querySelector('li');
+        const repoItem = document.createElement('li');
 // 5c. Give it a class of "repo"        
-        repoItem.classList.add('.repo');
+        repoItem.classList.add('repo');
 // 5d. Create <h3> element for repo name        
-        repo.innerHTML = `<h3>${repo.name}</h3>`;
+        repoItem.innerHTML = `<h3>${repo.name}</h3>`;
 // 5e. Append repo item so it shows in repo list        
         repoList.append(repoItem);
     }    
